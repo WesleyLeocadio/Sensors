@@ -23,26 +23,11 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     var textLight: TextView? = null
     var textAprox: TextView? = null
     var textAceler: TextView? = null
+
     var textGyroscope: TextView? = null
 
 
-    override fun onPause() {
-        super.onPause()
-        sensorManager!!.unregisterListener(this)
-    }
 
-    override fun onResume() {
-        super.onResume()
-        sensorManager!!.registerListener(this, sensorLight, SensorManager.SENSOR_DELAY_NORMAL)
-        sensorManager!!.registerListener(this, sensorProximy, SensorManager.SENSOR_DELAY_NORMAL)
-        sensorManager!!.registerListener(
-            this,
-            sensorAccelerometer,
-            SensorManager.SENSOR_DELAY_NORMAL
-        )
-        sensorManager!!.registerListener(this, sensorGyroscope, SensorManager.SENSOR_DELAY_NORMAL)
-
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,7 +46,19 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         sensorGyroscope = sensorManager?.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
     }
 
+    override fun onPause() {
+        super.onPause()
+        sensorManager!!.unregisterListener(this)
+    }
 
+    override fun onResume() {
+        super.onResume()
+        sensorManager!!.registerListener(this, sensorLight, SensorManager.SENSOR_DELAY_NORMAL)
+        sensorManager!!.registerListener(this, sensorProximy, SensorManager.SENSOR_DELAY_NORMAL)
+        sensorManager!!.registerListener(this, sensorAccelerometer,SensorManager.SENSOR_DELAY_NORMAL)
+        sensorManager!!.registerListener(this, sensorGyroscope, SensorManager.SENSOR_DELAY_NORMAL)
+
+    }
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
         sensorManager!!.registerListener(this, sensorLight, SensorManager.SENSOR_DELAY_NORMAL)
         sensorManager!!.registerListener(this, sensorProximy, SensorManager.SENSOR_DELAY_NORMAL)
@@ -72,25 +69,42 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
     override fun onSensorChanged(event: SensorEvent) {
         val vl = (event.values[0])
+
         if (event.sensor.type == Sensor.TYPE_LIGHT) {
-            textLight!!.text = "Light:  ${vl}"
-            Log.i("sensor", "Light:  ${vl}")
+            if(vl>100){
+                textLight!!.text = "Light: ALTA"
+                idLight.setBackgroundResource(R.color.colorAccent)
+            }else{
+                textLight!!.text = "Light: BAIXA"
+                idLight.setBackgroundResource(R.color.colorPrimaryDark)
+            }
+           // Log.i("sensor", "Light:  ${vl}")
         }
 
         if (event.sensor.type == Sensor.TYPE_PROXIMITY) {
-            textAprox!!.text = "Aprox:  ${vl}"
+            if(vl>0){
+                textAprox!!.text = "PROXI: LIVRE"
+                idProximity.setBackgroundResource(R.color.colorAccent)
+
+            }else{
+                textAprox!!.text = "PROXI: FECHADO"
+                idProximity.setBackgroundResource(R.color.colorPrimaryDark)
+            }
 
             Log.i("sensor", "Aproximidade:  ${vl}")
 
         }
 
         if (event.sensor.type == Sensor.TYPE_ACCELEROMETER) {
-            textAceler!!.text = "Aprox:  ${vl}"
-            Log.i("sensor", "Acelerometro:  ${vl}")
+            textAceler!!.text = "ACCELER: X:${vl};"
+            idAccelerometer.setBackgroundResource(R.color.colorAccent)
+
+         //   Log.i("sensor", "Acelerometro:  ${vl}")
 
         }
 
         if (event.sensor.type == Sensor.TYPE_GYROSCOPE) {
+
             textGyroscope!!.text = "Gyroscope:  ${vl}"
             Log.i("sensor", "Gyroscope:  ${vl}")
 

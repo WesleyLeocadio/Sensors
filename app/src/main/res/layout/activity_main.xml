@@ -8,25 +8,79 @@
     android:gravity="center"
     tools:context=".MainActivity">
 
-
     <TextView
-        android:id="@+id/TextProximity"
+        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nada proximo" />
+        android:text="Sensores"
+        android:textSize="45sp"
+        android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textLight"
+    <LinearLayout
+        android:id="@+id/idLight"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/textAccelerometer"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+
+        <TextView
+            android:id="@+id/textLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp" />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/idProximity"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/textGyroscope"
+        android:layout_height="100dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/TextProximity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/idAccelerometer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="100dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textAccelerometer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/idGyrocospe"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textGyroscope"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp" />
+
+    </LinearLayout>
+
 
 
 </LinearLayout>
